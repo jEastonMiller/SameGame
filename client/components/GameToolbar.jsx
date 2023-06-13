@@ -28,6 +28,9 @@ function GameToolbar ({ height, width }) {
             backgroundColor: 'hsl(0, 0%, 76%)',
             width: `${height * 0.94}px`,
             height: `${height * 0.94}px`,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }
         }
       >

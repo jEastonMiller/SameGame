@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import useWindowDimensions from '../components/windowSizeHook';
+import useWindowDimensions from '../components/windowSizeHook.jsx';
 
-import { Block, GameToolbar, GameWindowMenu, ScoreFooter } from '../components/components'
+import { Block, GameToolbar, GameWindowMenu, ScoreFooter } from '../components/components.jsx'
 
 function MainContainer () {
   const [gameWidth, setGameWidth] = useState(null);
@@ -10,6 +10,7 @@ function MainContainer () {
   const [blocks, setBlocks] = useState([]);
   const [matrix, setMatrix] = useState([]);
   const [matrixUpdate, setMatrixUpdate] = useState(false);
+  const [newGame, setNewGame] = useState(false)
   const [score, setScore] = useState(0);
   const [mark, setMark] = useState(0);
   const [point, setPoint] = useState('(POINT :   0)')
@@ -20,23 +21,24 @@ function MainContainer () {
 
   // initialize block list
   useEffect(() => {
-  const blockVals = [{letter: 'A', color: 'hsl(240, 98%, 48%)', textColor: 'rgba(0, 0, 0, 1.0'}, {letter: 'B', color: 'hsl(357, 99%, 48%)', textColor: 'rgba(0, 0, 0, 1.0' }, {letter: 'C', color: 'hsl(300, 98%, 50%)', textColor: 'rgba(0, 0, 0, 1.0'}, {letter: 'D', color: 'hsl(60, 98%, 50%)', textColor: 'rgba(0, 0, 0, 1.0'}, {letter: 'E', color: 'hsl(180, 99%, 50%)', textColor: 'rgba(0, 0, 0, 1.0'}]
-  const outputMatrix = [];
-  const outputBlocks = []
-  for(let i = 0; i < boardSize; i++){
-    const pusher = [];
-    for(let n = 0; n < 20; n++) {
-      const randVal = blockVals[Math.floor(Math.random() * 5)]
-      outputBlocks.push({x: n, y: i, val: randVal })
-      pusher.push(randVal);
-    }
-    outputMatrix.push(pusher);
-  };
-  if (!startMatrix) setStartMatrix(outputMatrix);
-  setMatrix(outputMatrix);
-  setBlocks(outputBlocks);
-  console.log(blocks);
-  },[])
+    const blockVals = [{letter: 'A', color: 'hsl(240, 98%, 48%)', textColor: 'rgba(0, 0, 0, 1.0'}, {letter: 'B', color: 'hsl(357, 99%, 48%)', textColor: 'rgba(0, 0, 0, 1.0' }, {letter: 'C', color: 'hsl(300, 98%, 50%)', textColor: 'rgba(0, 0, 0, 1.0'}, {letter: 'D', color: 'hsl(60, 98%, 50%)', textColor: 'rgba(0, 0, 0, 1.0'}, {letter: 'E', color: 'hsl(180, 99%, 50%)', textColor: 'rgba(0, 0, 0, 1.0'}]
+    const outputMatrix = [];
+    const outputBlocks = []
+    for(let i = 0; i < boardSize; i++){
+      console.log('hello')
+      const pusher = [];
+      for(let n = 0; n < 20; n++) {
+        const randVal = blockVals[Math.floor(Math.random() * 5)]
+        outputBlocks.push({x: n, y: i, val: randVal })
+        pusher.push(randVal);
+      }
+      outputMatrix.push(pusher);
+    };
+    setStartMatrix(outputMatrix);
+    setMatrix(outputMatrix);
+    setBlocks(outputBlocks);
+    console.log(blocks);
+  },[newGame])
 
   // update block list
   useEffect(() => {
@@ -113,8 +115,6 @@ function MainContainer () {
 
     //const addedScore = Math.floor(( ( coordCache.length ) ** 3 ) / 3 - (coordCache.length ** 2) / 2 + coordCache.length / 6 + 1);
     let addedScore;
-    
-
     
     // preview selection on first click
     if (!coordCacheStore) {
@@ -206,24 +206,43 @@ function MainContainer () {
     }
     setMatrix(newMatrix);
     setMatrixUpdate(!matrixUpdate);
-
   }
 
+  // handle replay
+  const handleReplay = () => {
+    setMatrix(JSON.parse(JSON.stringify(startMatrix)));
+    setScore(0)
+    setMatrixUpdate(!matrixUpdate);
+  }
+
+  const handleNewGame = () => {
+    setNewGame(!newGame);
+    setScore(0)
+    setMatrixUpdate(!matrixUpdate);
+  }
   
   return (
-    <div>
-      <GameToolbar height={gameHeight / 20} width={gameWidth} />
+    <div
+    >
+      <button
+        onClick={() => {
+          handleNewGame();
+        }}
+      >New Game</button>
+      <GameToolbar height={gameHeight / 20} width={gameWidth} handleReplay={handleReplay} />
       <GameWindowMenu height={gameHeight / 20} width={gameWidth} />
       <div 
       className='flex flex-wrap flex-row border-1 border-gray bg-green-600'
         style={{
           height: gameHeight,
-          width: gameWidth
+          width: gameWidth,
+          background: 'rgba(0, 195, 0, 1.0)'
         }} 
       >
         {blocks.map(block => <Block key={`${block.x}${block.y}`} x={block.x} y={block.y} textColor={block.val.textColor} val={block.val.letter} color={block.val.color} boardSize={boardSize} coordCacheStore={coordCacheStore} handleMatchClick={handleMatchClick} handleDeselect={handleDeselect}/>)}
       </div>
       <ScoreFooter height={gameHeight / 20} width={gameWidth} mark={mark} point={point} score={score} />
+
     </div>
   )
 }

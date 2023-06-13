@@ -26,9 +26,24 @@
   font-family: 'Libre Caslon Text', serif;
 }
 
+.scoreFooter {
+  /* border: '1px solid rgba(0, 0, 0, 1.0)';
+  display: 'flex';
+  flexDirection: 'row';
+  alignItems: 'center';
+  backgroundColor: 'hsl(0, 0%, 100%)';
+  padding: '0px 3px'; */
+}
+
 .scoreFooter p {
   font-family: 'pixel font';
 }
+
+/* .menuItem {
+  display: 'flex';
+  flex-direction: 'row';
+  margin: 4px 0px;
+} */
 
 .gameToolbar p {
   font-family: 'pixel font';
@@ -36,4 +51,18 @@
 
 .gameToolbar h4 {
   font-family: 'pixel font';
+}
+
+button {
+  font-family: 'pixel font';
+}
+
+.subMenuContainer {
+  border: '1px solid rgba(0, 0, 0, 1.0)'
+}
+
+.subMenuItem {
+  display: 'inline';
+  padding: '0px 16px';
+  border: '1px solid rgba(0, 0, 0, 1.0)';
 }

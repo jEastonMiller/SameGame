@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import useWindowDimensions from '../components/windowSizeHook';
+import useWindowDimensions from './windowSizeHook.jsx';
 
 
 function Block ({ key, x, y, textColor, val, color, handleMatchClick, boardSize, coordCacheStore, handleDeselect}) {
