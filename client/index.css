@@ -1,0 +1,90 @@
+/* @import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities'; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'pixel font';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+    url('./assets/dogica-webfont.woff') format('woff');
+}
+
+* {
+  cursor: default;
+}
+
+#page {
+  background-color: hsl(181, 100%, 26%);
+  
+}
+
+.block {
+  font-family: 'Libre Caslon Text', serif;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.scoreFooter p {
+  font-family: 'pixel font';
+  font-size: 0.70em;
+}
+
+.gameToolbar p {
+  font-family: 'pixel font';
+  font-size: 1em;
+}
+
+.gameToolbar h4 {
+  font-family: 'pixel font';
+  font-size: 0.7em;
+}
+
+.menus {
+  display: flex;
+  flex-direction: row;
+  float: left;
+}
+
+#windowsStart {
+  font-family: 'pixel font';
+}
+
+.menus li {
+  font-family: 'pixel font';
+  font-size: 0.8em;
+  padding-left: .55em;
+  padding-right: 1em; 
+}
+
+.dropdown-side {
+  display: block;
+  border: black solid 1px;
+}
+
+.dropdown-down {
+  display: block;
+}
+
+.dropdown {
+  display: none;
+}
+
+.shortcut {
+  font-family: 'pixel font';
+}
+
+
+
+
+
+
